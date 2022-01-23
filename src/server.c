@@ -6,12 +6,14 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 17:54:57 by apigeon           #+#    #+#             */
-/*   Updated: 2022/01/23 17:55:19 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/01/23 18:20:17 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "utils.h"
+
 int	main(void)
 {
-	// TODO
+	printf("Je suis le server !");
 	return (0);
 }
