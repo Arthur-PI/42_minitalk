@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 17:54:57 by apigeon           #+#    #+#             */
-/*   Updated: 2022/01/25 20:16:39 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/02/01 19:24:03 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,10 @@ static void handler(int signum)
 		if (signum == SIGUSR2)
 			m.size += 1;
 		if (m.bitsSend == size)
+		{
 			m.message = malloc(m.size + 1);
+			printf("Message size: %d\n", m.size);
+		}
 	}
 	else if (m.bitsSend <= size + m.size * 8)
 	{
@@ -50,6 +53,6 @@ int	main(void)
 	if (error)
 		return (1);
 	printf("Je suis le server ! (PID: %d)\n", getpid());
-	pause();
+	while(1);
 	return (0);
 }
