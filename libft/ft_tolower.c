@@ -1,35 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/23 17:52:40 by apigeon           #+#    #+#             */
-/*   Updated: 2022/01/25 19:49:57 by apigeon          ###   ########.fr       */
+/*   Created: 2021/09/08 20:19:00 by apigeon           #+#    #+#             */
+/*   Updated: 2021/11/25 17:12:21 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <string.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <signal.h>
-# include <time.h>
-
-# include "libft.h"
-
-typedef struct	s_message
+int	ft_tolower(int c)
 {
-	int		size;
-	char	*message;
-	int		bitsSend;
-}				t_message;
-
-
-
-
-#endif
+	if (c >= 'A' && c <= 'Z')
+		return (c + 32);
+	return (c);
+}

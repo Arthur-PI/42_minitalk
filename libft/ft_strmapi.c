@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/23 17:52:40 by apigeon           #+#    #+#             */
-/*   Updated: 2022/01/25 19:49:57 by apigeon          ###   ########.fr       */
+/*   Created: 2021/11/26 17:39:53 by apigeon           #+#    #+#             */
+/*   Updated: 2021/11/28 15:33:23 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <string.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <signal.h>
-# include <time.h>
-
-# include "libft.h"
-
-typedef struct	s_message
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	int		size;
-	char	*message;
-	int		bitsSend;
-}				t_message;
+	int		i;
+	char	*s_cpy;
 
-
-
-
-#endif
+	if (!s)
+		return (NULL);
+	s_cpy = malloc(ft_strlen(s) + 1);
+	if (!s_cpy)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		s_cpy[i] = (*f)(i, s[i]);
+		i++;
+	}
+	s_cpy[i] = 0;
+	return (s_cpy);
+}

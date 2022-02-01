@@ -1,35 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/23 17:52:40 by apigeon           #+#    #+#             */
-/*   Updated: 2022/01/25 19:49:57 by apigeon          ###   ########.fr       */
+/*   Created: 2021/09/08 20:21:28 by apigeon           #+#    #+#             */
+/*   Updated: 2021/11/25 17:08:50 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <string.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <signal.h>
-# include <time.h>
-
-# include "libft.h"
-
-typedef struct	s_message
+int	ft_toupper(int c)
 {
-	int		size;
-	char	*message;
-	int		bitsSend;
-}				t_message;
-
-
-
-
-#endif
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
+	return (c);
+}

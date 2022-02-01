@@ -1,35 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ft_memset.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/23 17:52:40 by apigeon           #+#    #+#             */
-/*   Updated: 2022/01/25 19:49:57 by apigeon          ###   ########.fr       */
+/*   Created: 2021/09/09 11:51:33 by apigeon           #+#    #+#             */
+/*   Updated: 2021/09/09 12:22:55 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <string.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <signal.h>
-# include <time.h>
-
-# include "libft.h"
-
-typedef struct	s_message
+void	*ft_memset(void *b, int c, size_t len)
 {
-	int		size;
-	char	*message;
-	int		bitsSend;
-}				t_message;
+	size_t	i;
+	char	*string_b;
 
-
-
-
-#endif
+	i = 0;
+	string_b = b;
+	while (i < len)
+		string_b[i++] = (char)c;
+	return (b);
+}

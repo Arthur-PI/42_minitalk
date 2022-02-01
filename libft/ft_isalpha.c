@@ -1,40 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/23 17:55:48 by apigeon           #+#    #+#             */
-/*   Updated: 2022/01/25 19:51:20 by apigeon          ###   ########.fr       */
+/*   Created: 2021/09/07 16:16:27 by apigeon           #+#    #+#             */
+/*   Updated: 2021/11/25 17:08:20 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "libft.h"
 
-static void	sendSize(int pid, int size)
+int	ft_isalpha(int c)
 {
-	int	i;
-
-	i = sizeof(size) * 8;
-	while (i >= 0)
-	{
-		kill(pid, SIGUSR1 + ((size >> i) % 2));
-		usleep(1000);
-		i--;
-	}
-}
-
-int	main(int ac, char **av)
-{
-	int		spid;
-	char	*message;
-
-	if (ac != 3)
+	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
 		return (1);
-	spid = ft_atoi(av[1]);
-	message = av[2];
-	printf("pid = %d; message = %s; size_t = %zu\n", spid, message, sizeof(size_t));
-	sendSize(spid, ft_strlen(message));
 	return (0);
 }

@@ -1,35 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ft_isprint.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/23 17:52:40 by apigeon           #+#    #+#             */
-/*   Updated: 2022/01/25 19:49:57 by apigeon          ###   ########.fr       */
+/*   Created: 2021/09/08 20:10:28 by apigeon           #+#    #+#             */
+/*   Updated: 2021/09/08 20:11:14 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
-
-# include <unistd.h>
-# include <string.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <signal.h>
-# include <time.h>
-
-# include "libft.h"
-
-typedef struct	s_message
+int	ft_isprint(int c)
 {
-	int		size;
-	char	*message;
-	int		bitsSend;
-}				t_message;
-
-
-
-
-#endif
+	if (c < 32 || c > 126)
+		return (0);
+	return (1);
+}

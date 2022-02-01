@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ft_strlcat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/23 17:52:40 by apigeon           #+#    #+#             */
-/*   Updated: 2022/01/25 19:49:57 by apigeon          ###   ########.fr       */
+/*   Created: 2021/09/08 16:43:02 by apigeon           #+#    #+#             */
+/*   Updated: 2021/09/08 17:14:57 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <string.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <signal.h>
-# include <time.h>
-
-# include "libft.h"
-
-typedef struct	s_message
+size_t	ft_strlcat(char *dst, const char *src, size_t dstsize)
 {
-	int		size;
-	char	*message;
-	int		bitsSend;
-}				t_message;
+	size_t	i;
+	size_t	lendst;
+	size_t	lensrc;
 
-
-
-
-#endif
+	lendst = ft_strlen(dst);
+	lensrc = ft_strlen(src);
+	if (lendst >= dstsize)
+		return (lensrc + dstsize);
+	i = 0;
+	while (src[i] && i < dstsize - lendst - 1)
+	{
+		dst[lendst + i] = src[i];
+		i++;
+	}
+	dst[lendst + i] = 0;
+	return (lendst + lensrc);
+}

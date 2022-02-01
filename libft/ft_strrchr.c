@@ -1,35 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/23 17:52:40 by apigeon           #+#    #+#             */
-/*   Updated: 2022/01/25 19:49:57 by apigeon          ###   ########.fr       */
+/*   Created: 2021/09/09 08:46:12 by apigeon           #+#    #+#             */
+/*   Updated: 2021/11/28 15:30:25 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef UTILS_H
-# define UTILS_H
+#include "libft.h"
 
-# include <unistd.h>
-# include <string.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <signal.h>
-# include <time.h>
-
-# include "libft.h"
-
-typedef struct	s_message
+char	*ft_strrchr(const char *s, int c)
 {
-	int		size;
-	char	*message;
-	int		bitsSend;
-}				t_message;
+	int				i;
+	unsigned char	uc;
+	unsigned char	*us;
 
-
-
-
-#endif
+	uc = (unsigned char)c;
+	us = (unsigned char *)s;
+	if (ft_isascii(uc))
+	{
+		i = ft_strlen(s);
+		while (i >= 0)
+		{
+			if (us[i] == uc)
+				return ((char *)s + i);
+			i--;
+		}
+	}
+	return (NULL);
+}
