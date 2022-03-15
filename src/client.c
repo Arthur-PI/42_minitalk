@@ -6,11 +6,13 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 17:55:48 by apigeon           #+#    #+#             */
-/*   Updated: 2022/02/01 19:25:55 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/03/15 17:34:49 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
+
+#define WAIT_TIME 1000
 
 static void	sendSize(int pid, int size)
 {
@@ -20,9 +22,29 @@ static void	sendSize(int pid, int size)
 	while (i >= 0)
 	{
 		kill(pid, SIGUSR1 + ((size >> i) % 2));
-		usleep(1000);
+		usleep(WAIT_TIME);
 		i--;
 	}
+}
+
+static void	sendMessage(int pid, unsigned char *m)
+{
+	int	i;
+	int	j;
+
+	i = 0;
+	while (m[i])
+	{
+		j = 7;
+		while (j >= 0)
+		{
+			kill(pid, SIGUSR1 + ((m[i] >> j) % 2));
+			usleep(WAIT_TIME);
+			j--;
+		}
+		i++;
+	}
+	kill(pid, SIGUSR1);
 }
 
 int	main(int ac, char **av)
@@ -34,7 +56,7 @@ int	main(int ac, char **av)
 		return (1);
 	spid = ft_atoi(av[1]);
 	message = av[2];
-	printf("pid = %d; message = \"%s\" (%zu); sizeof = %zu\n", spid, message, ft_strlen(message), sizeof(int));
 	sendSize(spid, ft_strlen(message));
+	sendMessage(spid, (unsigned char*)message);
 	return (0);
 }

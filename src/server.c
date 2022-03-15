@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 17:54:57 by apigeon           #+#    #+#             */
-/*   Updated: 2022/02/01 19:24:03 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/03/15 17:40:05 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,36 @@
 static void handler(int signum)
 {
 	int					size;
+	int					tmp;
 	static t_message	m = {0, NULL, 0};
 
 	m.bitsSend++;
 	size = (int)sizeof(m.size) * 8 + 1;
-	printf("signum = %d; bitsSend = %d\n", signum, m.bitsSend);
 	if (m.bitsSend <= size)
 	{
 		m.size <<= 1;
 		if (signum == SIGUSR2)
 			m.size += 1;
 		if (m.bitsSend == size)
-		{
 			m.message = malloc(m.size + 1);
-			printf("Message size: %d\n", m.size);
-		}
 	}
 	else if (m.bitsSend <= size + m.size * 8)
 	{
 		if (!m.message)
 			exit(1);
-		// TODO receive the messeage
+		tmp = (m.bitsSend - size - 1) / 8;
+		m.message[tmp] <<= 1;
+		if (signum == SIGUSR2)
+			m.message[tmp] += 1;
+	}
+	else
+	{
+		m.message[m.size] = 0;
+		write(1, m.message, m.size);
+		write(1, "\n", 1);
+		m.bitsSend = 0;
+		m.message = NULL;
+		m.size = 0;
 	}
 	// TODO send confirmation
 }
