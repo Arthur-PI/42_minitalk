@@ -6,15 +6,13 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 17:55:48 by apigeon           #+#    #+#             */
-/*   Updated: 2022/03/15 17:34:49 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/03/15 17:47:03 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-#define WAIT_TIME 1000
-
-static void	sendSize(int pid, int size)
+static void	send_size(int pid, int size)
 {
 	int	i;
 
@@ -27,7 +25,7 @@ static void	sendSize(int pid, int size)
 	}
 }
 
-static void	sendMessage(int pid, unsigned char *m)
+static void	send_message(int pid, unsigned char *m)
 {
 	int	i;
 	int	j;
@@ -56,7 +54,7 @@ int	main(int ac, char **av)
 		return (1);
 	spid = ft_atoi(av[1]);
 	message = av[2];
-	sendSize(spid, ft_strlen(message));
-	sendMessage(spid, (unsigned char*)message);
+	send_size(spid, ft_strlen(message));
+	send_message(spid, (unsigned char *)message);
 	return (0);
 }

@@ -18,10 +18,8 @@ CLIENT	= client
 
 
 SERVER_SRC	= server.c \
-			  utils.c
 
 CLIENT_SRC	= client.c \
-			  utils.c
 
 SERVER_OBJS	= $(addprefix $(OBJ_DIR), $(SERVER_SRC:.c=.o))
 
