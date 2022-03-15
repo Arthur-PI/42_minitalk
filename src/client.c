@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 17:55:48 by apigeon           #+#    #+#             */
-/*   Updated: 2022/03/15 17:47:03 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/03/16 02:15:10 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,24 @@ static void	send_message(int pid, unsigned char *m)
 	kill(pid, SIGUSR1);
 }
 
+static void	response(int signum)
+{
+	(void)signum;
+	ft_putstr_fd("Message Received !\n", 1);
+}
+
 int	main(int ac, char **av)
 {
-	int		spid;
-	char	*message;
+	int					spid;
+	char				*message;
 
 	if (ac != 3)
 		return (1);
 	spid = ft_atoi(av[1]);
 	message = av[2];
+	signal(SIGUSR1, response);
 	send_size(spid, ft_strlen(message));
 	send_message(spid, (unsigned char *)message);
+	pause();
 	return (0);
 }
