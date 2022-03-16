@@ -10,7 +10,7 @@ LIBFT	= libft.a
 
 CC		= cc
 
-CFLAGS	= -Wall -Werror -Wextra -I$(DEP_DIR) -I$(LIBFT_DIR) -fsanitize=address
+CFLAGS	= -Wall -Werror -Wextra -I$(DEP_DIR) -I$(LIBFT_DIR) #-fsanitize=address
 
 SERVER	= server
 
@@ -49,6 +49,7 @@ clean:
 
 fclean:	clean
 	rm -f server client
+	rm -f libft.a
 
 re:		fclean all
 
