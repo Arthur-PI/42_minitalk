@@ -6,7 +6,7 @@
 #    By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:36:37 by apigeon           #+#    #+#              #
-#    Updated: 2022/03/28 14:00:35 by apigeon          ###   ########.fr        #
+#    Updated: 2022/03/28 14:19:56 by apigeon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ $(CLIENT):	$(CLIENT_OBJS)
 	@echo "$(BLUE)Creating program file -> $(WHITE)$@... $(GREEN)[Done]$(NOC)"
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
-	@$(CC) $(CFLAGS) -I$(LIBFT_DIR) -I$(HEADER)  -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(LIBFT_DIR) -I$(HEADER) -c $< -o $@
 	@echo "$(BLUE)Creating object file -> $(WHITE)$(notdir $@)... $(GREEN)[Done]$(NOC)"
 
 $(OBJ_DIR):
