@@ -6,13 +6,13 @@
 #    By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:36:37 by apigeon           #+#    #+#              #
-#    Updated: 2022/03/28 12:18:20 by apigeon          ###   ########.fr        #
+#    Updated: 2022/03/28 14:00:35 by apigeon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 ### COMPILATION ###
 CC		= cc
-CFLAG	= -Wall -Werror
+CFLAG	= -Wall -Werror -Wextra
 
 ### EXECUTABLE ###
 SERVER	= server
@@ -68,12 +68,12 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 clean:
-	@echo "$(GREEN)Supressing object files$(NOC)"
+	@echo "$(RED)Supressing object files$(NOC)"
 	@rm -rf $(OBJ_DIR)
 	@$(MAKE) clean -C $(LIBFT_DIR)
 
 fclean:	clean
-	@echo "$(GREEN)Supressing program files$(NOC)"
+	@echo "$(RED)Supressing program files$(NOC)"
 	@rm -f $(SERVER) $(CLIENT)
 	@$(MAKE) fclean -C $(LIBFT_DIR)
 
