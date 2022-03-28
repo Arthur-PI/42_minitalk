@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 17:52:40 by apigeon           #+#    #+#             */
-/*   Updated: 2022/03/23 16:07:02 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/03/28 12:04:52 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,23 @@
 
 # include "libft.h"
 
-# define WAIT_TIME 50
+# define INTERVAL_WAIT_TIME 50
+# define PONG_WAIT_TIME 10000
+
+# ifndef TRUE
+#  define TRUE 1
+# endif
+
+# ifndef FALSE
+#  define FALSE 0
+# endif
 
 typedef struct s_message
 {
-	int		size;
-	char	*message;
+	char	malloc_now;
+	int		length;
 	int		bits_send;
+	char	*string;
 }				t_message;
 
 #endif

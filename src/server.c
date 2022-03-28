@@ -6,64 +6,62 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 17:54:57 by apigeon           #+#    #+#             */
-/*   Updated: 2022/03/23 16:06:53 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/03/28 12:15:33 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "utils.h"
 
-static void	handle_size(int signum, int size, t_message *m)
+t_message	g_message = {FALSE, 0, 0, NULL};
+
+static void	handle_size(int signum, int size)
 {
-	m->size <<= 1;
+	g_message.length <<= 1;
 	if (signum == SIGUSR2)
-		m->size += 1;
-	if (m->bits_send == size)
-	{
-		m->message = malloc(m->size + 1);
-		if (m->message == NULL)
-			exit(1);
-	}
+		g_message.length += 1;
+	if (g_message.bits_send == size)
+		g_message.malloc_now = TRUE;
 }
 
-static void	handle_message(int signum, int size, t_message *m)
+static void	handle_message(int signum, int size)
 {
 	int	index;
 
-	index = (m->bits_send - size - 1) / 8;
-	m->message[index] <<= 1;
+	index = (g_message.bits_send - size - 1) / 8;
+	g_message.string[index] <<= 1;
 	if (signum == SIGUSR2)
-		m->message[index] += 1;
+		g_message.string[index] += 1;
 }
 
-static void	message_done(t_message *m, int pid)
+static void	message_done(int pid)
 {
-	m->message[m->size] = 0;
-	ft_putstr_fd(m->message, 1);
+	g_message.string[g_message.length] = 0;
+	ft_putstr_fd(g_message.string, 1);
 	ft_putchar_fd('\n', 1);
-	free(m->message);
-	m->bits_send = 0;
-	m->message = NULL;
-	m->size = 0;
-	usleep(WAIT_TIME);
+	free(g_message.string);
+	g_message.malloc_now = FALSE;
+	g_message.bits_send = 0;
+	g_message.length = 0;
+	g_message.string = NULL;
+	usleep(INTERVAL_WAIT_TIME);
 	if (kill(pid, SIGUSR2) == -1)
 		exit(1);
 }
 
 static void	handler(int signum, siginfo_t *si, void *data)
 {
-	int					size;
-	static t_message	m = {0, NULL, 0};
+	int					size_bits;
 
 	(void)data;
-	m.bits_send++;
-	size = (int) sizeof(m.size) * 8 + 1;
-	if (m.bits_send <= size)
-		handle_size(signum, size, &m);
-	else if (m.bits_send <= size + m.size * 8)
-		handle_message(signum, size, &m);
+	g_message.bits_send++;
+	size_bits = (int) sizeof(g_message.length) * 8 + 1;
+	if (g_message.bits_send <= size_bits)
+		handle_size(signum, size_bits);
+	else if (g_message.bits_send <= size_bits + g_message.length * 8)
+		handle_message(signum, size_bits);
 	else
-		message_done(&m, si->si_pid);
-	usleep(WAIT_TIME);
+		message_done(si->si_pid);
+	usleep(INTERVAL_WAIT_TIME);
 	if (kill(si->si_pid, SIGUSR1) == -1)
 		exit(1);
 }
@@ -82,6 +80,15 @@ int	main(void)
 	ft_putnbr_fd(getpid(), 1);
 	ft_putchar_fd('\n', 1);
 	while (1)
-		continue ;
+	{
+		pause();
+		if (g_message.malloc_now == TRUE)
+		{
+			g_message.string = malloc(g_message.length + 1);
+			if (g_message.string == NULL)
+				exit(1);
+			g_message.malloc_now = FALSE;
+		}
+	}
 	return (0);
 }

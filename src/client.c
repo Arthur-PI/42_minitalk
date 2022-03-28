@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 17:55:48 by apigeon           #+#    #+#             */
-/*   Updated: 2022/03/23 15:57:39 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/03/28 12:13:18 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ static void	send_signal(int pid, int signal)
 	i = 1;
 	if (kill(pid, signal) == -1)
 		exit(1);
-	while (usleep(WAIT_TIME * 100) == 0)
+	while (usleep(PONG_WAIT_TIME) == 0)
 	{
 		if (i == 3 || kill(pid, signal) == -1)
 			exit(1);
 		i++;
 	}
-	usleep(WAIT_TIME);
+	usleep(INTERVAL_WAIT_TIME);
 }
 
 static void	send_size(int pid, int size)
@@ -73,6 +73,8 @@ int	main(int ac, char **av)
 	if (ac != 3)
 		return (1);
 	spid = ft_atoi(av[1]);
+	if (spid < 1)
+		exit(1);
 	message = av[2];
 	signal(SIGUSR1, response);
 	signal(SIGUSR2, response);
