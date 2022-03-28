@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 17:54:57 by apigeon           #+#    #+#             */
-/*   Updated: 2022/03/28 12:15:33 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/03/28 14:40:59 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,7 @@ static void	handle_message(int signum, int size)
 static void	message_done(int pid)
 {
 	g_message.string[g_message.length] = 0;
-	ft_putstr_fd(g_message.string, 1);
-	ft_putchar_fd('\n', 1);
+	ft_putendl_fd(g_message.string, 1);
 	free(g_message.string);
 	g_message.malloc_now = FALSE;
 	g_message.bits_send = 0;

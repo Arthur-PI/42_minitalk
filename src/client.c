@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 17:55:48 by apigeon           #+#    #+#             */
-/*   Updated: 2022/03/28 12:13:18 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/03/28 14:50:10 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,12 @@
 
 static void	send_signal(int pid, int signal)
 {
-	int	i;
-
-	i = 1;
 	if (kill(pid, signal) == -1)
 		exit(1);
-	while (usleep(PONG_WAIT_TIME) == 0)
+	if (usleep(PONG_WAIT_TIME) == 0)
 	{
-		if (i == 3 || kill(pid, signal) == -1)
-			exit(1);
-		i++;
+		ft_putendl_fd("Error while sending signal to server !", 1);
+		exit(1);
 	}
 	usleep(INTERVAL_WAIT_TIME);
 }

@@ -6,7 +6,7 @@
 /*   By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/23 17:52:40 by apigeon           #+#    #+#             */
-/*   Updated: 2022/03/28 12:04:52 by apigeon          ###   ########.fr       */
+/*   Updated: 2022/03/28 14:50:34 by apigeon          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include "libft.h"
 
 # define INTERVAL_WAIT_TIME 50
-# define PONG_WAIT_TIME 10000
+# define PONG_WAIT_TIME 100000
 
 # ifndef TRUE
 #  define TRUE 1
