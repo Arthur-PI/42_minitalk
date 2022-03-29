@@ -63,8 +63,8 @@ static void	response(int signum)
 
 int	main(int ac, char **av)
 {
-	int					spid;
-	char				*message;
+	int		spid;
+	char	*message;
 
 	if (ac != 3)
 		return (1);
