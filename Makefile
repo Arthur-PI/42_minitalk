@@ -6,7 +6,7 @@
 #    By: apigeon <apigeon@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/23 14:36:37 by apigeon           #+#    #+#              #
-#    Updated: 2022/03/28 14:53:41 by apigeon          ###   ########.fr        #
+#    Updated: 2022/04/11 21:58:51 by apigeon          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,11 +53,11 @@ $(LIBFT):
 	@$(MAKE) -C $(LIBFT_DIR)
 
 $(SERVER):	$(SERVER_OBJS)
-	@$(CC) $(CFLAGS) -L$(LIBFT_DIR) -lft $(SERVER_OBJS) -o $(SERVER)
+	@$(CC) $(CFLAGS) -L$(LIBFT_DIR) $(SERVER_OBJS) -lft -o $(SERVER)
 	@echo "$(BLUE)Creating program file -> $(WHITE)$@... $(GREEN)[Done]$(NOC)"
 
 $(CLIENT):	$(CLIENT_OBJS)
-	@$(CC) $(CFLAGS) -L$(LIBFT_DIR) -lft $(CLIENT_OBJS) -o $(CLIENT)
+	@$(CC) $(CFLAGS) -L$(LIBFT_DIR) $(CLIENT_OBJS) -lft -o $(CLIENT)
 	@echo "$(BLUE)Creating program file -> $(WHITE)$@... $(GREEN)[Done]$(NOC)"
 
 $(OBJ_DIR)/%.o : $(SRC_DIR)/%.c
